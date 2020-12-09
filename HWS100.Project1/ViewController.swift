@@ -22,8 +22,9 @@ class ViewController: UITableViewController {
                 pictures.append(item)
             }
         }
-        title = "Storm viewer"
+        pictures.sort()
         
+        title = "Storm viewer"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
@@ -39,6 +40,8 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(identifier: "Detail") as? DetailViewController {
             vc.selectedImage = pictures[indexPath.row]
+            vc.totalPictures = pictures.count
+            vc.selectedPictureNumber = indexPath.row + 1
             navigationController?.pushViewController(vc, animated: true)
         }
     }
